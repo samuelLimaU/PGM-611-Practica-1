@@ -8,5 +8,4 @@ X, adicionalmente para el plano Z tiene un fuente de iluminación direccional, a
 solo que de intensidades cambiantes
 
 Para las animaciones de orbitar cree una funcion general de orbitar a la cual la derive en 2 slow y fast, adicionalmente
-esta funcion se ejecuta dentro del bucle de animacion general, las orbitas en vez de un objeto unico creado son creados
-dinamicamente en la animacion para evitar declarlos como objetos declarados
+esta funcion se ejecuta dentro del bucle de animacion general
