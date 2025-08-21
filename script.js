@@ -36,8 +36,8 @@ luz_sol.position.copy(sol.position); // misma posicion que el sol
 escena.add(luz_sol);
 
 const geo_mercurio = new THREE.DodecahedronGeometry(20, 1);
-const mat_mercurio = new THREE.MeshPhongMaterial({ 
-    color: 0x888888, 
+const mat_mercurio = new THREE.MeshPhongMaterial({
+    color: 0x888888,
     shininess: 30
 });
 const mercurio = new THREE.Mesh(geo_mercurio, mat_mercurio);
@@ -77,7 +77,7 @@ const mat_jupi = new THREE.MeshPhongMaterial({
     shininess: 30
 });
 const jupi = new THREE.Mesh(geo_jupi, mat_jupi);
-jupi.position.set(-380, 0, 0); 
+jupi.position.set(-380, 0, 0);
 escena.add(jupi);
 
 const geo_sat = new THREE.DodecahedronGeometry(20, 1);
@@ -86,7 +86,7 @@ const mat_sat = new THREE.MeshPhongMaterial({
     shininess: 30
 });
 const sat = new THREE.Mesh(geo_sat, mat_sat);
-sat.position.set(-450, 0, 0); 
+sat.position.set(-450, 0, 0);
 escena.add(sat);
 
 const geo_anillo = new THREE.RingGeometry(25, 35, 64);
@@ -106,7 +106,7 @@ const mat_urano = new THREE.MeshPhongMaterial({
     shininess: 30
 });
 const urano = new THREE.Mesh(geo_urano, mat_urano);
-urano.position.set(-540, 0, 0); 
+urano.position.set(-540, 0, 0);
 escena.add(urano);
 
 const geo_nept = new THREE.DodecahedronGeometry(15, 1);
@@ -115,7 +115,7 @@ const mat_nept = new THREE.MeshPhongMaterial({
     shininess: 30
 });
 const nept = new THREE.Mesh(geo_nept, mat_nept);
-nept.position.set(-610, 0, 0); 
+nept.position.set(-610, 0, 0);
 escena.add(nept);
 
 const geo_pluto = new THREE.DodecahedronGeometry(10, 1);
@@ -124,7 +124,7 @@ const mat_pluto = new THREE.MeshPhongMaterial({
     shininess: 30
 });
 const pluto = new THREE.Mesh(geo_pluto, mat_pluto);
-pluto.position.set(-670, 0, 0); 
+pluto.position.set(-670, 0, 0);
 escena.add(pluto);
 
 let angulo_mercurio = 0;
@@ -137,13 +137,13 @@ let angulo_urano = 70;
 let angulo_nept = 90;
 let angulo_pluto = 195;
 
-function crearOrbita(radio) {
+function crear_orbita(radio) {
     const geo_orbita = new THREE.RingGeometry(radio - 0.5, radio + 0.5, 128);
     const mat_orbita = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.3
+        opacity: 0.7    
     });
     const orbita = new THREE.Mesh(geo_orbita, mat_orbita);
     orbita.position.copy(sol.position); // centra la orbita en el sol
@@ -151,13 +151,23 @@ function crearOrbita(radio) {
     escena.add(orbita);
 }
 
+crear_orbita(100);  // mercurio
+crear_orbita(150);  // venus
+crear_orbita(200);  // terra
+crear_orbita(250);  // mars
+crear_orbita(300);  // jupi
+crear_orbita(350);  // sat
+crear_orbita(400);  // urano
+crear_orbita(450);  // nept
+crear_orbita(500);  // pluto
+
 function animacion() {
     requestAnimationFrame(animacion); //funcion recuriva
     sol.rotation.z += 0.01; //rotar el sol en z
     sol.rotation.x += 0.01; //rotar el sol en x 
-    anillo.rotation.z += 0.01; 
-    anillo.rotation.x += 0.01;   
-    anillo.rotation.y += 0.01; 
+    anillo.rotation.z += 0.01;
+    anillo.rotation.x += 0.01;
+    anillo.rotation.y += 0.01;
 
     angulo_mercurio = orbitar_fast(mercurio, angulo_mercurio, 100);
     angulo_venus = orbitar_fast(venus, angulo_venus, 150);
@@ -169,16 +179,6 @@ function animacion() {
     angulo_urano = orbitar_slow(urano, angulo_urano, 400);
     angulo_nept = orbitar_slow(nept, angulo_nept, 450);
     angulo_pluto = orbitar_slow(pluto, angulo_pluto, 500);
-
-    crearOrbita(100);  // mercurio
-    crearOrbita(150);  // venus
-    crearOrbita(200);  // terra
-    crearOrbita(250);  // mars
-    crearOrbita(300);  // jupi
-    crearOrbita(350);  // sat
-    crearOrbita(400);  // urano
-    crearOrbita(450);  // nept
-    crearOrbita(500);  // pluto
 
     controls.update(); // actualizar los controles
 
